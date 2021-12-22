@@ -1,0 +1,310 @@
+tags:
+- name: restaurant
+  description: restaurant API
+
+paths:
+  # [GET] restaurant
+  /api/restaurant:
+    get:
+      tags:
+      - restaurant
+      summary: Find All Restaurants
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+
+    # [POST] restaurant
+    post:
+      tags:
+      - restaurant
+      summary: Add Restaurant
+      parameters:
+      - name: body
+        in: body
+        description: restaurant Data
+        required: true
+        schema:
+          $ref: '#/definitions/restaurant'
+      responses:
+        201:
+          description: 'Created'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+  # [GET] restaurant/id
+  /api/restaurant/{id}:
+    get:
+      tags:
+      - restaurant
+      summary: Find Restaurant By Id
+      parameters:
+      - name: id
+        in: path
+        description: Restaurant Id
+        required: true
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    # [PUT] restaurant/id
+    put:
+      tags:
+      - restaurant
+      summary: Update Restaurant By Id
+      parameters:
+      - name: id
+        in: path
+        description: restaurant Id
+        required: true
+      - name: body
+        in: body
+        description: restaurant Data
+        required: true
+        schema:
+          $ref: '#/definitions/restaurant'
+      responses:
+        200:
+          description: 'OK'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    # [DELETE] restaurant/id
+    delete:
+      tags:
+      - restaurant
+      summary: Delete Restaurant By Id
+      parameters:
+      - name: id
+        in: path
+        description: restaurant Id
+        required: true
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+  # [GET] product
+  /api/product:
+    get:
+      tags:
+      - product
+      summary: Find All Products
+      responses:
+        200:
+          description: 'OK'
+        500:
+          description: 'Server Error'
+
+    # [POST] product
+    post:
+      tags:
+      - product
+      summary: Add Product
+      parameters:
+      - name: body
+        in: body
+        description: product Data
+        required: true
+        schema:
+          $ref: '#/definitions/product'
+      responses:
+        201:
+          description: 'Created'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+  # [GET] product/restaurant/id
+  /api/product/restaurant/{id}:
+    get:
+      tags:
+      - product
+      summary: Find Product By Restaurant Id
+      parameters:
+      - name: id
+        in: path
+        description: Restaurant Id
+        required: true
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+  # [GET] product/id
+  /api/product/{id}:
+    get:
+      tags:
+      - product
+      summary: Find Product By Id
+      parameters:
+      - name: id
+        in: path
+        description: Product Id
+        required: true
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    # [PUT] product/id
+    put:
+      tags:
+      - product
+      summary: Update Product By Id
+      parameters:
+      - name: id
+        in: path
+        description: product Id
+        required: true
+      - name: body
+        in: body
+        description: product Data
+        required: true
+        schema:
+          $ref: '#/definitions/product'
+      responses:
+        200:
+          description: 'OK'
+        400:
+          description: 'Bad Request'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+    # [DELETE] product/id
+    delete:
+      tags:
+      - product
+      summary: Delete Product By Id
+      parameters:
+      - name: id
+        in: path
+        description: product Id
+        required: true
+      responses:
+        200:
+          description: 'OK'
+        409:
+          description: 'Conflict'
+        500:
+          description: 'Server Error'
+
+# definitions
+definitions:
+  restaurant:
+    type: object
+    required:
+        - name
+        - openingHours
+    properties:
+      _id:
+        type: string
+      name:
+        type: string
+      address:
+        type: string
+      picture:
+        type: string
+      openingHours:
+        type: object
+        properties:
+          monday:
+            type: object
+            properties:
+              from:
+                type: number
+              to: 
+                type: number
+          tuesday:
+            type: object
+            properties:
+              from:
+                type: number
+              to: 
+                type: number
+          wednesday:
+            type: object
+            properties:
+              from:
+                type: number
+              to: 
+                type: number
+          thursday:
+            type: object
+            properties:
+              from:
+                type: number
+              to: 
+                type: number
+          friday:
+            type: object
+            properties:
+              from:
+                type: number
+              to: 
+                type: number
+          saturday:
+            type: object
+            properties:
+              from:
+                type: number
+              to: 
+                type: number
+          sunday:
+            type: object
+            properties:
+              from:
+                type: number
+              to: 
+                type: number
+
+  product:
+    type: object
+    required:
+        - name
+        - restaurantId
+        - category
+    properties:
+      _id:
+        type: string
+      restaurantId:
+        type: string
+      name:
+        type: string
+      price:
+        type: number
+      photo:
+        type: string
+      category:
+        type: string
+
+schemes:
+ - https
+ - http
